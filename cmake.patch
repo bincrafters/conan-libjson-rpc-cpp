@@ -1,0 +1,44 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3479d81..bc4d760 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,14 +1,7 @@
+ cmake_minimum_required(VERSION 3.0)
+ 
+ # setup directory where we should look for cmake files
+-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+-
+-option(HUNTER_ENABLED "Enable Hunter package manager" NO)
+-include(HunterGate)
+-HunterGate(
+-	URL "https://github.com/ruslo/hunter/archive/v0.18.47.tar.gz"
+-	SHA1 "f0c476a3a0f9edd6182936d8c4460811f112189c"
+-)
++list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/source_subfolder/cmake")
+ 
+ project(libjson-rpc-cpp)
+ 
+@@ -82,11 +75,6 @@ message(STATUS "COMPILE_EXAMPLES: ${COMPILE_EXAMPLES}")
+ include(CMakeCompilerSettings)
+ include(CMakeDependencies)
+ 
+-# setup output directories
+-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
+-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
+-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
+-
+ # setup global include_directories (for backwards compatibility)
+ include_directories("${CMAKE_BINARY_DIR}/gen/")
+ include_directories("${CMAKE_BINARY_DIR}/gen/jsonrpccpp/common")
+diff --git a/src/jsonrpccpp/common/jsonparser.h.in b/src/jsonrpccpp/common/jsonparser.h.in
+index 3363ccf..2a24720 100644
+--- a/src/jsonrpccpp/common/jsonparser.h.in
++++ b/src/jsonrpccpp/common/jsonparser.h.in
+@@ -10,6 +10,6 @@
+ #ifndef JSONRPC_CPP_JSONPARSER_H_
+ #define JSONRPC_CPP_JSONPARSER_H_
+ 
+-#include <@JSONCPP_INCLUDE_PREFIX@/json.h>
++#include <json/json.h>
+ 
+ #endif // JSONRPC_CPP_JSONPARSER_H_
