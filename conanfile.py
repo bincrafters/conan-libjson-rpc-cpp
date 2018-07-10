@@ -12,9 +12,10 @@ class LibJsonRPCCPPConan(ConanFile):
     homepage = "https://github.com/cinemast/libjson-rpc-cpp"
     url = "http://gitlab.khomp.corp/conan/conan-libjson-rpc-cpp"
     license = "MIT"
+    author = "Bincrafters <bincrafters@gmail.com>"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    options = { "shared": [True, False], "fPIC": [True, False], "with_http_client": [True, False] }
+    options = {"shared": [True, False], "fPIC": [True, False], "with_http_client": [True, False]}
     default_options = "shared=True", "fPIC=True", "with_http_client=False"
     exports_sources = ["CMakeLists.txt", "cmake.patch"]
     exports = ["LICENSE.md"]
@@ -45,9 +46,12 @@ class LibJsonRPCCPPConan(ConanFile):
         cmake.definitions["COMPILE_EXAMPLES"] = False
         cmake.definitions["COMPILE_TESTS"] = False
         cmake.definitions["COMPILE_STUBGEN"] = False
-        cmake.definitions["REDIS_SERVER"] = False #TODO: Hiredis
-        cmake.definitions["REDIS_CLIENT"] = False #TODO: Hiredis
-        cmake.definitions["HTTP_SERVER"] = False # TODO: libmicrohttpd
+        # TODO (uilian): Hiredis
+        cmake.definitions["REDIS_SERVER"] = False
+        # TODO (uilian): Hiredis
+        cmake.definitions["REDIS_CLIENT"] = False
+        # TODO (uilian): libmicrohttpd
+        cmake.definitions["HTTP_SERVER"] = False
         cmake.definitions["HTTP_CLIENT"] = self.options.with_http_client
         cmake.definitions["TCP_SOCKET_SERVER"] = True
         cmake.definitions["TCP_SOCKET_CLIENT"] = True
@@ -72,4 +76,5 @@ class LibJsonRPCCPPConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
-        self.cpp_info.libs.append("pthread")
+        if self.settings.os == "Linux":
+            self.cpp_info.libs.append("pthread")
