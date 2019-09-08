@@ -16,11 +16,11 @@ class LibJsonRPCCPPConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     options = {"shared": [True, False], "fPIC": [True, False], "with_http_client": [True, False], "with_http_server": [True, False]}
-    default_options = "shared=True", "fPIC=True", "with_http_client=False", "with_http_server=False"
+    default_options = {'shared': True, 'fPIC': True, 'with_http_client': False, 'with_http_server': False}
     exports_sources = ["CMakeLists.txt", "cmake.patch"]
     exports = ["LICENSE.md"]
-    source_subfolder = "source_subfolder"
-    build_subfolder = "build_subfolder"
+    _source_subfolder = "source_subfolder"
+    _build_subfolder = "build_subfolder"
     requires = "jsoncpp/1.8.4@theirix/stable"
 
     def config_options(self):
@@ -39,9 +39,9 @@ class LibJsonRPCCPPConan(ConanFile):
         source_url = "https://github.com/cinemast/libjson-rpc-cpp"
         tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
         extracted_dir = self.name + "-" + self.version
-        os.rename(extracted_dir, self.source_subfolder)
+        os.rename(extracted_dir, self._source_subfolder)
 
-    def configure_cmake(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
@@ -57,18 +57,18 @@ class LibJsonRPCCPPConan(ConanFile):
         cmake.definitions["TCP_SOCKET_SERVER"] = True
         cmake.definitions["TCP_SOCKET_CLIENT"] = True
         cmake.definitions["WITH_COVERAGE"] = False
-        cmake.configure(build_folder=self.build_subfolder)
+        cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
     def build(self):
-        tools.patch(base_path=self.source_subfolder, patch_file="cmake.patch")
-        cmake = self.configure_cmake()
+        tools.patch(base_path=self._source_subfolder, patch_file="cmake.patch")
+        cmake = self._configure_cmake()
         cmake.build()
 
     def package(self):
-        self.copy(pattern="LICENSE.txt", dst="licenses", src=self.source_subfolder)
-        self.copy("*.h", src=os.path.join(self.source_subfolder, "src", "jsonrpccpp"), dst=os.path.join("include", "jsonrpccpp"))
-        self.copy("*.h", src=os.path.join(self.build_subfolder, "gen"), dst=os.path.join("include"))
+        self.copy(pattern="LICENSE.txt", dst="licenses", src=self._source_subfolder)
+        self.copy("*.h", src=os.path.join(self._source_subfolder, "src", "jsonrpccpp"), dst=os.path.join("include", "jsonrpccpp"))
+        self.copy("*.h", src=os.path.join(self._build_subfolder, "gen"), dst=os.path.join("include"))
         self.copy(pattern="*.dll", dst="bin", keep_path=False)
         self.copy(pattern="*.lib", dst="lib", keep_path=False)
         self.copy(pattern="*.a", dst="lib", keep_path=False)
