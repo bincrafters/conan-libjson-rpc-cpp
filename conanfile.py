@@ -9,7 +9,6 @@ class LibJsonRPCCPPConan(ConanFile):
     homepage = "https://github.com/cinemast/libjson-rpc-cpp"
     url = "http://gitlab.khomp.corp/conan/conan-libjson-rpc-cpp"
     license = "MIT"
-    author = "Bincrafters <bincrafters@gmail.com>"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     options = {"shared": [True, False], "fPIC": [True, False], "with_http_client": [True, False], "with_http_server": [True, False]}
