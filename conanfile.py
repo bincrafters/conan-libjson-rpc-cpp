@@ -17,7 +17,7 @@ class LibJsonRPCCPPConan(ConanFile):
     exports = ["LICENSE.md"]
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
-    requires = "jsoncpp/1.8.4@theirix/stable"
+    requires = "jsoncpp/1.9.2"
 
     def config_options(self):
         if self.settings.os == 'Windows':
@@ -27,7 +27,7 @@ class LibJsonRPCCPPConan(ConanFile):
 
     def requirements(self):
         if self.options.with_http_client:
-            self.requires.add("libcurl/7.56.1@bincrafters/stable")
+            self.requires.add("libcurl/7.67.0")
         if self.options.with_http_server:
             self.requires.add("libmicrohttpd/0.9.59@bincrafters/stable")
 
