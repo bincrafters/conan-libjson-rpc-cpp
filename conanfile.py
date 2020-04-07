@@ -14,7 +14,6 @@ class LibJsonRPCCPPConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False], "with_http_client": [True, False], "with_http_server": [True, False]}
     default_options = {'shared': True, 'fPIC': True, 'with_http_client': False, 'with_http_server': False}
     exports_sources = ["CMakeLists.txt", "cmake.patch"]
-    exports = ["LICENSE.md"]
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
     requires = "jsoncpp/1.9.2"
