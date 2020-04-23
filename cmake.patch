@@ -21,6 +21,7 @@ index 3479d81..bc4d760 100644
 @@ -82,11 +75,6 @@ message(STATUS "COMPILE_EXAMPLES: ${COMPILE_EXAMPLES}")
  include(CMakeCompilerSettings)
  include(CMakeDependencies)
+ include(GNUInstallDirs)
  
 -# setup output directories
 -set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
