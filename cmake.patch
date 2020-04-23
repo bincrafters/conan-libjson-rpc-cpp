@@ -18,7 +18,7 @@ index 3479d81..bc4d760 100644
  
  project(libjson-rpc-cpp)
  
-@@ -82,11 +75,6 @@ message(STATUS "COMPILE_EXAMPLES: ${COMPILE_EXAMPLES}")
+@@ -84,11 +75,6 @@ message(STATUS "COMPILE_EXAMPLES: ${COMPILE_EXAMPLES}")
  include(CMakeCompilerSettings)
  include(CMakeDependencies)
  include(GNUInstallDirs)
