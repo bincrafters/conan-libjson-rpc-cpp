@@ -4,7 +4,7 @@ import os
 
 class LibJsonRPCCPPConan(ConanFile):
     name = "libjson-rpc-cpp"
-    version = "1.1.1"
+    version = "1.2.0"
     description = "C++ framework for json-rpc (json remote procedure call)"
     homepage = "https://github.com/cinemast/libjson-rpc-cpp"
     url = "http://gitlab.khomp.corp/conan/conan-libjson-rpc-cpp"
