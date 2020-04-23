@@ -22,7 +22,7 @@ class LibJsonRPCCPPConan(ConanFile):
         if self.settings.os == 'Windows':
             del self.options.fPIC
         else:
-            self.options["jsoncpp"].use_pic = self.options.fPIC
+            self.options["jsoncpp"].fPIC = self.options.fPIC
 
     def requirements(self):
         if self.options.with_http_client:
