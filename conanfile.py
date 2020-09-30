@@ -16,7 +16,7 @@ class LibJsonRPCCPPConan(ConanFile):
     exports_sources = ["CMakeLists.txt", "cmake.patch"]
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
-    requires = "jsoncpp/1.9.2"
+    requires = "jsoncpp/1.9.4"
 
     def config_options(self):
         if self.settings.os == 'Windows':
