@@ -28,7 +28,7 @@ class LibJsonRPCCPPConan(ConanFile):
         if self.options.with_http_client:
             self.requires("libcurl/7.67.0")
         if self.options.with_http_server:
-            self.requires("libmicrohttpd/0.9.59@bincrafters/stable")
+            self.requires("libmicrohttpd/0.9.75")
 
     def source(self):
         source_url = "https://github.com/cinemast/libjson-rpc-cpp"
